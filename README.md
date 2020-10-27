@@ -16,3 +16,4 @@ JEKYLL_ENV="production" bundle exec jekyll build
 rm -rf ../docs/*
 cp -rf _site/* ../docs
 ```
+3. Run `git push` to deploy changes to GitHub blog.
