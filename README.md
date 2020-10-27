@@ -17,3 +17,4 @@ rm -rf ../docs/*
 cp -rf _site/* ../docs
 ```
 3. Run `git push` to deploy changes to GitHub blog.
+

@@ -1,0 +1,10 @@
+echo "Building blog with production option..."
+JEKYLL_ENV=production bundle exec jekyll build
+
+echo "Emptying docs/..."
+rm -rf ../docs/*
+
+echo "Copying built files to docs/..."
+cp -rf _site/* ../docs
+
+echo "Next: git push"
