@@ -4,4 +4,4 @@
 
 layout: home
 ---
-Hello bypasser! This is my personal space where I keep coding related stuff such as algorithm implementations, pattern designs, system designs, etc. I write for my own learning and future references. You use at your own risk :P
+Hello bypasser! This is my personal space where I keep coding related stuff such as algorithm implementations, pattern designs, system designs, etc. I write for my own learning and experiences. You use at your own risk :P

@@ -1,20 +1,15 @@
-My personal blog.
+My personal website.
 
 ## Development instructions
 1. Incremental build:
 ```
-bundle exec jekyll serve --incremental
+./scripts/build
 ```
 
 ## Deployment instructions
-1. Build with `JEKYLL_ENV="production"`:
+1. Build and pack built files to `docs/`:
 ``` 
-JEKYLL_ENV="production" bundle exec jekyll build
+./scripts/pack
 ```
-2. Copy built files to `docs/`:
 ```
-rm -rf ../docs/*
-cp -rf _site/* ../docs
-```
-3. Run `git push` to deploy changes to GitHub blog.
-
+2. Run `git push` to deploy changes to GitHub Pages.
