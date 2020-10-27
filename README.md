@@ -8,5 +8,6 @@ bundle exec jekyll serve --incremental
 
 2. Copy built files to `docs/`:
 ```
-cp -rf * ../docs
+rm -rf ../docs/*
+cp -rf _site/* ../docs
 ```
