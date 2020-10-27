@@ -1,22 +1,46 @@
 {"0": {
+    "doc": "BFS",
+    "title": "Breadth first search",
+    "content": " ",
+    "url": "https://hoanhtien.github.io/bfs/#breadth-first-search",
+    "relUrl": "/bfs/#breadth-first-search"
+  },"1": {
+    "doc": "BFS",
+    "title": "Basic implementation",
+    "content": "#define pb push_back class Graph { private: int n; vector&lt;vector&lt;int&gt;&gt; adj; public: Graph(int n) : n(n) { adj.resize(n); } void addEdge(int u, int v) { adj[u].pb(v); adj[v].pb(u); } vector&lt;int&gt; distanceFrom(const vector&lt;int&gt;&amp; starts) { vector&lt;int&gt; dist(n, -1); queue&lt;int&gt; q; for (int i : starts) { dist[i] = 0; q.push(i); } while (!q.empty()) { int i = q.front(); q.pop(); for (int j : adj[i]) if (dist[j] == -1) { dist[j] = dist[i] + 1; q.push(j); } } return dist; } }; . ",
+    "url": "https://hoanhtien.github.io/bfs/#basic-implementation",
+    "relUrl": "/bfs/#basic-implementation"
+  },"2": {
+    "doc": "BFS",
+    "title": "Application",
+    "content": "Given a matrix consists of 0 and 1, find the distance of the nearest 0 for each cell. The distance between two adjacent cells is 1. #define range(i,a,b) for (int i=int(a); i&lt;int(b); ++i) #define id(i, j) (i) * n + (j) vector&lt;vector&lt;int&gt;&gt; updateMatrix(vector&lt;vector&lt;int&gt;&gt;&amp; matrix) { int m = matrix.size(), n = matrix[0].size(); Graph g(m*n); range(i,0,m) range(j,0,n) { if (i+1 &lt; m) g.addEdge(id(i, j), id(i+1, j)); if (j+1 &lt; n) g.addEdge(id(i, j), id(i, j+1)); } vector&lt;int&gt; zeroes; range(i,0,m) range(j,0,n) { if (matrix[i][j] == 0) zeroes.pb(id(i, j)); } vector&lt;int&gt; distance = g.distanceFrom(zeroes); vector&lt;vector&lt;int&gt;&gt; res(m, vector&lt;int&gt;(n)); range(i,0,m) range(j,0,n) res[i][j] = distance[id(i, j)]; return res; } . ",
+    "url": "https://hoanhtien.github.io/bfs/#application",
+    "relUrl": "/bfs/#application"
+  },"3": {
+    "doc": "BFS",
+    "title": "BFS",
+    "content": " ",
+    "url": "https://hoanhtien.github.io/bfs/",
+    "relUrl": "/bfs/"
+  },"4": {
     "doc": "DFS",
     "title": "Depth first search",
     "content": " ",
     "url": "https://hoanhtien.github.io/dfs/#depth-first-search",
     "relUrl": "/dfs/#depth-first-search"
-  },"1": {
+  },"5": {
     "doc": "DFS",
     "title": "Basic implementation",
     "content": "Determine whether two vertices in a graph are connected. #define pb push_back class Graph { private: int n; vector&lt;vector&lt;int&gt;&gt; adj; void dfs(int u) { visited[u] = true; for (int v : adj[u]) if (!visited[v]) dfs(v); } public: Graph(int n) : n(n) { adj.resize(n); } void addEdge(int u, int v) { adj[u].pb(v); adj[v].pb(u); } bool isConnected(int start, int end) { vector&lt;bool&gt; visited(n, false); dfs(start); return visited[end]; } }; . ",
     "url": "https://hoanhtien.github.io/dfs/#basic-implementation",
     "relUrl": "/dfs/#basic-implementation"
-  },"2": {
+  },"6": {
     "doc": "DFS",
     "title": "Application 1: Escape 2D maze",
-    "content": "Determine whether it is possible to go from cell (0, 0) to cell (m-1, n-1) in a 2D maze. The maze is represented as a 2D vector of which each cell has a value of either 0 or 1. Value 0 means that cell is walkable and 1 means it is unwalkable. #define range(i,a,b) for (int i=int(a); i&lt;int(b); ++i) #define id(i,j) i*n+j bool canEscape(vector&lt;vector&lt;int&gt;&gt; maze) { int m = maze.size(), n = maze[0].size(); Graph g(m*n); range(i,0,m) range(j,0,n) if (maze[i][j] == 0) { if (i+1 &lt; m &amp;&amp; maze[i+1][j] == 0) g.addEdge(id(i, j), id(i+1, j)); if (j+1 &lt; n &amp;&amp; maze[i][j+1] == 0) g.addEdge(id(i, j), id(i, j+1)); } return g.isConnected(id(0, 0), id(m-1, n-1)); } . ",
+    "content": "Determine whether it is possible to go from cell (0, 0) to cell (m-1, n-1) in a 2D maze. The maze is represented as a 2D vector of which each cell has a value of either 0 or 1. Value 0 means that cell is walkable and 1 means it is unwalkable. #define range(i,a,b) for (int i=int(a); i&lt;int(b); ++i) #define id(i,j) (i) * n + (j) bool canEscape(vector&lt;vector&lt;int&gt;&gt; maze) { int m = maze.size(), n = maze[0].size(); Graph g(m*n); range(i,0,m) range(j,0,n) if (maze[i][j] == 0) { if (i+1 &lt; m &amp;&amp; maze[i+1][j] == 0) g.addEdge(id(i, j), id(i+1, j)); if (j+1 &lt; n &amp;&amp; maze[i][j+1] == 0) g.addEdge(id(i, j), id(i, j+1)); } return g.isConnected(id(0, 0), id(m-1, n-1)); } . ",
     "url": "https://hoanhtien.github.io/dfs/#application-1-escape-2d-maze",
     "relUrl": "/dfs/#application-1-escape-2d-maze"
-  },"3": {
+  },"7": {
     "doc": "DFS",
     "title": "DFS",
     "content": " ",

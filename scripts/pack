@@ -1,10 +1,18 @@
-echo "Building blog with production option..."
+echo ">>> Building blog with production flag..."
+cd src
 JEKYLL_ENV=production bundle exec jekyll build
+cd ..
+echo "Done."
 
-echo "Emptying docs/..."
-rm -rf ../docs/*
+echo
+echo ">>> Emptying docs/..."
+rm -rf docs/*
+echo "Done."
 
-echo "Copying built files to docs/..."
-cp -rf _site/* ../docs
+echo
+echo ">>> Copying built files to docs/..."
+cp -rf src/_site/* docs
+echo "Done."
 
-echo "Next: git push"
+echo
+echo ">>> Next: git push"
