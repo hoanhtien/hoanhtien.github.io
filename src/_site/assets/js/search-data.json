@@ -1,50 +1,50 @@
 {"0": {
     "doc": "BFS",
-    "title": "Breadth first search",
-    "content": " ",
-    "url": "https://hoanhtien.github.io/bfs/#breadth-first-search",
-    "relUrl": "/bfs/#breadth-first-search"
-  },"1": {
-    "doc": "BFS",
-    "title": "Basic implementation",
-    "content": "#define pb push_back class Graph { private: int n; vector&lt;vector&lt;int&gt;&gt; adj; public: Graph(int n) : n(n) { adj.resize(n); } void addEdge(int u, int v) { adj[u].pb(v); adj[v].pb(u); } vector&lt;int&gt; distanceFrom(const vector&lt;int&gt;&amp; starts) { vector&lt;int&gt; dist(n, -1); queue&lt;int&gt; q; for (int i : starts) { dist[i] = 0; q.push(i); } while (!q.empty()) { int i = q.front(); q.pop(); for (int j : adj[i]) if (dist[j] == -1) { dist[j] = dist[i] + 1; q.push(j); } } return dist; } }; . ",
-    "url": "https://hoanhtien.github.io/bfs/#basic-implementation",
-    "relUrl": "/bfs/#basic-implementation"
-  },"2": {
-    "doc": "BFS",
-    "title": "Application",
-    "content": "Given a matrix consists of 0 and 1, find the distance of the nearest 0 for each cell. The distance between two adjacent cells is 1. #define range(i,a,b) for (int i=int(a); i&lt;int(b); ++i) class IdConverter { private: int n; public: IdConverter(int n) : n(n) {} int get(int i, int j) { return i * n + j; } }; vector&lt;vector&lt;int&gt;&gt; updateMatrix(vector&lt;vector&lt;int&gt;&gt;&amp; matrix) { int m = matrix.size(), n = matrix[0].size(); IdConverter idc(n); Graph g(m*n); range(i,0,m) range(j,0,n) { if (i+1 &lt; m) g.addEdge( idc.get(i,j), idc.get(i+1,j) ); if (j+1 &lt; n) g.addEdge( idc.get(i,j), idc.get(i,j+1) ); } vector&lt;int&gt; zeroes; range(i,0,m) range(j,0,n) if (matrix[i][j]==0) zeroes.pb(idc.get(i,j)); vector&lt;int&gt; distance = g.distanceFrom(zeroes); vector&lt;vector&lt;int&gt;&gt; res(m, vector&lt;int&gt;(n)); range(i,0,m) range(j,0,n) res[i][j] = distance[idc.get(i, j)]; return res; } . ",
-    "url": "https://hoanhtien.github.io/bfs/#application",
-    "relUrl": "/bfs/#application"
-  },"3": {
-    "doc": "BFS",
     "title": "BFS",
-    "content": " ",
-    "url": "https://hoanhtien.github.io/bfs/",
-    "relUrl": "/bfs/"
-  },"4": {
-    "doc": "DFS",
-    "title": "Depth first search",
-    "content": " ",
-    "url": "https://hoanhtien.github.io/dfs/#depth-first-search",
-    "relUrl": "/dfs/#depth-first-search"
-  },"5": {
-    "doc": "DFS",
-    "title": "Basic implementation",
-    "content": "Determine whether two vertices in a graph are connected. #define pb push_back class Graph { private: int n; vector&lt;vector&lt;int&gt;&gt; adj; void dfs(int u) { visited[u] = true; for (int v : adj[u]) if (!visited[v]) dfs(v); } public: Graph(int n) : n(n) { adj.resize(n); } void addEdge(int u, int v) { adj[u].pb(v); adj[v].pb(u); } bool isConnected(int start, int end) { vector&lt;bool&gt; visited(n, false); dfs(start); return visited[end]; } }; . ",
-    "url": "https://hoanhtien.github.io/dfs/#basic-implementation",
-    "relUrl": "/dfs/#basic-implementation"
-  },"6": {
-    "doc": "DFS",
-    "title": "Application 1: Escape 2D maze",
-    "content": "Determine whether it is possible to go from cell (0, 0) to cell (m-1, n-1) in a 2D maze. The maze is represented as a 2D vector of which each cell has a value of either 0 or 1. Value 0 means that cell is walkable and 1 means it is unwalkable. #define range(i,a,b) for (int i=int(a); i&lt;int(b); ++i) class IdConverter { private: int n; public: IdConverter(int n) : n(n) {} int get(int i, int j) { return i * n + j; } }; bool canEscape(vector&lt;vector&lt;int&gt;&gt; maze) { int m = maze.size(), n = maze[0].size(); IdConverter idc(n); Graph g(m*n); range(i,0,m) range(j,0,n) if (maze[i][j]==0) { if (i+1 &lt; m &amp;&amp; maze[i+1][j]==0) g.addEdge( idc.get(i,j), idc.get(i+1,j) ); if (j+1 &lt; n &amp;&amp; maze[i][j+1]==0) g.addEdge( idc.get(i,j), idc.get(i,j+1) ); } return g.isConnected( idc.get(0,0), idc.get(m-1,n-1) ); } . ",
-    "url": "https://hoanhtien.github.io/dfs/#application-1-escape-2d-maze",
-    "relUrl": "/dfs/#application-1-escape-2d-maze"
-  },"7": {
+    "content": "# Breadth first search ## Basic implementation Calculate the shortest distance from every vertex to a set of staring vertices. ```cpp class Graph { private: int n; vector> adj; vector dist; public: Graph(int n) : n(n) { adj.resize(n); dist.resize(n, -1); } void AddEdge(int u, int v) { adj[u].push_back(v); adj[v].push_back(u); } void Bfs(int start) { queue q; dist[start] = 0; q.push(start); while (!q.empty()) { int u = q.front(); q.pop(); for (int v : adj[u]) if (dist[v] == -1) { dist[v] = dist[u] + 1; q.push(v); } } } int Distance(int u) { return dist[u]; } }; ``` ## Example: Given a matrix consists of 0 and 1, find the distance of the nearest 0 for each cell. The distance between two adjacent cells is 1. ```cpp int numIslands(vector>& grid) { int m = grid.size(), n = grid[0].size(), res = 0; auto id = [&n] (int i, int j) { return i * n + j; }; auto is_land = [&grid] (int i, int j) { return grid[i + 1][j] == '1'; }; Graph g(m*n); for (int i = 0; i < m; ++i) { for (int j = 0; j < n; ++j) { if (grid[i][j] == '1') { if (i + 1 < m && grid[i+1][j] == '1') g.AddEdge( id(i, j), id(i+1, j) ); if (j + 1 < n && grid[i][j+1] == '1') g.AddEdge( id(i, j), id(i, j+1) ); } else --res; } } for (int i = 0; i < m; ++i) { for (int j = 0; j < n; ++j) { if (g.Distance( id(i, j) ) == -1) { g.Bfs( id(i, j) ); ++res; } } } return res; } ``` ",
+    "url": "http://localhost:4000/posts/bfs/",
+    "relUrl": "/posts/bfs/"
+  },"1": {
+    "doc": "C++ template for competitive programming",
+    "title": "C++ template for competitive programming",
+    "content": "# C++ template for competitive programming For competitive programming only, do not use at work. ```cpp typedef long long ll; typedef pair pii; typedef pair> piii; #define watch(x) cout void Print1D(string& info, C& seq) { cout void Print2D(string& info, C>& matrix) { cout << info << \":\" << endl; for (auto& row : matrix) Print1D(info, row); cout << endl; } ``` ",
+    "url": "http://localhost:4000/posts/cpp-template-for-cp/",
+    "relUrl": "/posts/cpp-template-for-cp/"
+  },"2": {
     "doc": "DFS",
     "title": "DFS",
+    "content": "# Depth first search ## Basic implementation Determine whether two vertices in a graph are connected. ```cpp class Graph { private: int n; vector> adj; vector visited; void Dfs(int u) { visited[u] = true; for (int v : adj[u]) if (!visited[v]) Dfs(v); } public: Graph(int n) : n(n) { adj.resize(n); visited.resize(n, false); } void AddEdge(int u, int v) { adj[u].push_back(v); adj[v].push_back(u); } bool IsConnected(int start, int end) { Dfs(start); return visited[end]; } }; ``` ## Example: Escape 2D maze Determine whether it is possible to go from cell (0, 0) to cell (m-1, n-1) in a 2D maze. The maze is represented as a 2D vector of which each cell has a value of either 0 or 1. Value 0 means that cell is walkable and 1 means it is unwalkable. ```cpp bool canEscape(vector> maze) { int m = maze.size(), n = maze[0].size(); auto id = [&n] (int i, int j) { return i * n + j; }; Graph g(m * n); for (int i = 0; i < m; ++i) { for (int j = 0; j < n; ++j) { if (maze[i][j] == 0) { if (i + 1 < m && maze[i+1][j] == 0) g.AddEdge( id(i, j), id(i + 1, j) ); if (j + 1 < n && maze[i][j+1] == 0) g.AddEdge( id(i, j), id(i, j + 1) ); } } } return g.IsConnected( id(0, 0), id(m - 1, n - 1) ); } ``` ",
+    "url": "http://localhost:4000/posts/dfs/",
+    "relUrl": "/posts/dfs/"
+  },"3": {
+    "doc": "Home",
+    "title": "Home",
+    "content": "Hello bypasser! This is my personal space where I keep coding related stuff such as algorithm implementations, pattern designs, system designs, etc. I write for my own learning and experiences. You use at your own risk :P ",
+    "url": "http://localhost:4000/",
+    "relUrl": "/"
+  },"4": {
+    "doc": "Union Find",
+    "title": "Union find",
     "content": " ",
-    "url": "https://hoanhtien.github.io/dfs/",
-    "relUrl": "/dfs/"
+    "url": "http://localhost:4000/posts/union-find/#union-find",
+    "relUrl": "/posts/union-find/#union-find"
+  },"5": {
+    "doc": "Union Find",
+    "title": "Basic implementation",
+    "content": "class UnionFind { private: vector&lt;int&gt; p; int cnt; public: UnionFind(int n) { p.resize(n, -1); cnt = n; } int Find(int u) { int root = u; while (p[root] != -1) root = p[root]; while (u != root) { int tmp = p[u]; p[u] = root; u = tmp; } return root; } void Union(int u, int v) { u = Find(u); v = Find(v); if (u != v) { p[v] = u; --cnt; } } int Count() { return cnt; } }; . ",
+    "url": "http://localhost:4000/posts/union-find/#basic-implementation",
+    "relUrl": "/posts/union-find/#basic-implementation"
+  },"6": {
+    "doc": "Union Find",
+    "title": "Example: Number of islands",
+    "content": "int numIslands(vector&lt;vector&lt;char&gt;&gt;&amp; grid) { int m = grid.size(), n = grid[0].size(), res = 0; auto id = [n] (int i, int j) { return i * n + j; }; auto inside = [m, n] (int i, int j) { return i &gt;= 0 &amp;&amp; j &gt;= 0 &amp;&amp; i &lt; m &amp;&amp; j &lt; n; }; auto neighbours = [&amp;] (int i, int j) { vector&lt;pair&lt;int, int&gt;&gt; res; res.reserve(4); for (int k = 0; k &lt; 4; ++k) { int u = i + deltaRow[k], v = j + deltaCol[k]; if (inside(u, v) &amp;&amp; grid[u][v] == '1') res.emplace_back( u, v ); } return res; }; UnionFind uf(m * n); for (int i = 0; i &lt; m; ++i) { for (int j = 0; j &lt; n; ++j) { if (grid[i][j] == '1') { for (auto p : neighbours(i, j)) uf.Union( id(i, j), id(p.first, p.second) ); } else --res; } } return res + uf.Count(); } . ",
+    "url": "http://localhost:4000/posts/union-find/#example-number-of-islands",
+    "relUrl": "/posts/union-find/#example-number-of-islands"
+  },"7": {
+    "doc": "Union Find",
+    "title": "Union Find",
+    "content": " ",
+    "url": "http://localhost:4000/posts/union-find/",
+    "relUrl": "/posts/union-find/"
   }
 }
