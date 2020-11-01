@@ -3,7 +3,6 @@ layout: default
 title: BFS
 nav_order: 4
 ---
-
 # Breadth first search
 
 ## Basic implementation
@@ -47,8 +46,7 @@ class Graph {
 };
 ```
 
-## Example:
-Given a matrix consists of 0 and 1, find the distance of the nearest 0 for each cell. The distance between two adjacent cells is 1.
+## Example: Number of islands
 ```cpp
 int numIslands(vector<vector<char>>& grid) {
   int m = grid.size(), n = grid[0].size(), res = 0;
@@ -65,7 +63,8 @@ int numIslands(vector<vector<char>>& grid) {
         if (j + 1 < n && grid[i][j+1] == '1')
           g.AddEdge( id(i, j), id(i, j+1) );
       }
-      else --res;
+      else
+        --res;
     }
   }
 

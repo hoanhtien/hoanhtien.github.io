@@ -3,7 +3,6 @@ layout: default
 title: Union Find
 nav_order: 5
 ---
-
 # Union find
 
 ## Basic implementation
