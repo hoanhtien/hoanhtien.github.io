@@ -11,5 +11,4 @@ My personal website.
 ``` 
 ./scripts/pack
 ```
-```
 2. Run `git push` to deploy changes to GitHub Pages.
